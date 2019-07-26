@@ -1,0 +1,32 @@
+AllCops:
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  UseCache: false
+  Exclude:
+    # These files are generated automaticaly
+    - 'bin/**/*'
+    - "db/schema.rb"
+
+Metrics/LineLength:
+  Max: 120
+  # To make it possible to copy or click on URIs in the code, we allow lines
+  # contaning a URI to be longer than Max.
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+
+Metrics/BlockLength:
+  Exclude:
+    # Specs can be pretty large in terms of block length
+    - 'spec/**/*'
+
+Metrics/MethodLength:
+  Max: 15
+  CountComments: false
+
+Style/Documentation:
+  Exclude:
+    - 'app/**/*'
+    - 'config/application.rb'
+    - 'db/**/*'
