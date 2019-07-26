@@ -21,6 +21,7 @@ group :development, :test do
   gem 'pry'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'simplecov', require: false
 end
 
 group :development do
