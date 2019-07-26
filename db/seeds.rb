@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-POSTS_NUMBER = 200_000
-USERS_NUMBER = 100
-IP_ADDRESSES_NUMBER = 50
+POSTS_NUMBER = ENV['minimal'] ? 5000 : 200_000
+USERS_NUMBER = ENV['minimal'] ? 30 : 100
+IP_ADDRESSES_NUMBER = ENV['minimal'] ? 20 : 50
 
 usernames = []
 ip_addresses = []
