@@ -1,22 +1,29 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID=13218e5c07aded5e40555700ca500bc774cf53a4e10855d272e00f6dc3343307
+  - CC_TEST_REPORTER_ID=13218e5c07aded5e40555700ca500bc774cf53a4e10855d272e00f6dc3343307
 language: ruby
 rvm:
- - 2.6.1
+- 2.6.1
 branches:
   only:
   - master
 services:
-  - postgresql
+- postgresql
 script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rspec spec/
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec spec/
 before_script:
-  - psql -c 'create database api_blog_test;' -U postgres
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+- psql -c 'create database api_blog_test;' -U postgres
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+deploy:
+  provider: heroku
+  api_key:
+    secure: "O9t1KRMm69eimLcuZAzRlZudKveW/vUEj06pzEQwP66s7McdwXJ0fNfveLrlFZVgbXVJxl9UfDX46KAHGfK/J/c2elKlTwFqWpeHR3s1u/zvW+O1wPu4US8iw4/Yld246a8Lxl/wyhcSOlJkhcs/w80nken0VvkXyCGQmI5nZgEcQVRHmuTZh1QOJMxJ0dq4hM/qecYdZaTa02aGZU8DXXmJF9FluVO/i4uZn7mfrMHFp/lhfyNMkgASzSholnriwYJipSlNB3PDeqwpCKYmZ1PvutL9sf4cMuMRHjWr43UG/TbD/vyIGFvhuubvOxKxhmRL/QVPWIReRfpXTrQRcqRUbvZIXuyE5YcUFNdIM1iJQceejVmWUhHe0EaF2xugOFHiMavRDY9i1/rjMvBgWMaUm0otAlVtbsLFVvQmL+Ve5mF7oNQV6xvtpigJacRMz0dcxG+NtwrHI5rK7LJRhu7rANY+QWVTnww1RdQO0hxxiLEOaGW/dFmWtpWPviMhScSzj+Zo4aJAKTDjRUQ8FYRd9sB5HCjaJTqXdqh9bT1HJWdrCpGo/jrJMZZfxPHzrUwX0NjWdp1E4anCB9kt9d8oQJFZWDCmMSt6vSAR5q+xpNlVuKx357UbbIbz1LuWk/pAnQ/igZJR1+GqH1JF7UEK0TWz3M/r74v3w+L9kgc="
+  app:
+    master: test-blog-api-staging
