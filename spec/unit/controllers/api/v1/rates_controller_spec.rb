@@ -4,8 +4,8 @@ require 'rails_helper'
 
 describe Api::V1::RatesController do
   describe 'create post route', type: :request do
-    let!(:post_instance) { FactoryBot.create(:post, user: create(:user), user_ip: create(:user_ip)) }
-    let!(:old_rate_instance) { FactoryBot.create(:rate, post_id: post_instance.id, value: post_instance.rating) }
+    let!(:post_instance) { create(:post, user: create(:user), user_ip: create(:user_ip)) }
+    let!(:old_rate_instance) { create(:rate, post_id: post_instance.id, value: post_instance.rating) }
     let(:value) { rand(1..5) }
     let(:new_rating) { ((post_instance.rating + value.to_f) / 2) }
     let(:rate_params) do

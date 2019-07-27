@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Api::V1::PostsController do
   describe 'get top posts route', type: :request do
-    let!(:posts) { FactoryBot.create_list(:post, 20, user: create(:user), user_ip: create(:user_ip)) }
+    let!(:posts) { create_list(:post, 20, user: create(:user), user_ip: create(:user_ip)) }
     let!(:random_rate) { Post.all.each { |post| post.update(rating: rand(1..5)) } }
 
     before { get '/api/v1/posts/top?n=3' }
