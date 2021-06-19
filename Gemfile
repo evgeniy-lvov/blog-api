@@ -12,7 +12,6 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3'
 gem 'rails', '~> 5.2.4.6'
 
-
 group :development, :test do
   gem 'bullet'
   gem 'database_cleaner'

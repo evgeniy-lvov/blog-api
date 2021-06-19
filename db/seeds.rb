@@ -18,7 +18,7 @@ POSTS_NUMBER.times do |i|
   user_ip = user[:user_ip].sample
 
   title = Faker::Lorem.sentence
-  content = Faker::Lorem.paragraphs(5).join('\n')
+  content = Faker::Lorem.paragraphs(number: 5).join('\n')
   result_post = nil
 
   transaction = CreatePost.new
