@@ -22,6 +22,8 @@ before_script:
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 - rm -rf ./cc-test-reporter
+before_deploy:
+- gem install faraday -v 1.9.3
 deploy:
   provider: heroku
   api_key:
